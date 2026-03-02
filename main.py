@@ -1,22 +1,23 @@
-#water reminder
-
 import time
 from plyer import notification
+from datetime import datetime
 
-# The "Workhorse" function
 def drink_water_notification():
+    # 1. Send the notification
     notification.notify(
         title = "🥤 Time to Hydrate!",
-        message = "Drinking water keeps your brain sharp and your body healthy. Take a glass now!",
+        message = "Take a sip! Your brain needs it.",
         app_name = "Water Reminder",
-        # You can add a path to an .ico file here for a custom icon
-        timeout = 10 # This is how many seconds the alert stays on screen
+        timeout = 10 
     )
+    
+    # 2. Log the time to a file
+    with open("log.txt", "a") as file:
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        file.write(f"Reminded at: {now}\n")
 
 if __name__ == "__main__":
     while True:
         drink_water_notification()
-        
-        # Set the reminder frequency (in seconds)
-        # 60 * 60 = 3600 seconds (1 hour)
+        # Set to 3600 for 1 hour, or 10 for testing
         time.sleep(3600)
